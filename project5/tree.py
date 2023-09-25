@@ -67,11 +67,19 @@ def count_leaves(root) -> int:
     if root:
         if root.lchild is None and root.rchild is None:
             return 1
-        
         lcount = count_leaves(root.lchild)
         rcount = count_leaves(root.rchild)
-
         return lcount + rcount
+
+def is_proper(root):
+    if root:
+        if root.lchild is None and root.rchild is None:
+            return True
+        elif root.lchild is not None and root.rchild is not None:
+            # check left check right
+            return is_proper(root.lchild) & is_proper(root.rchild)
+        else:
+            return False
 
 if __name__ == "__main__":
     root = Node(1)
@@ -87,24 +95,25 @@ if __name__ == "__main__":
     print("leaves:{}".format(count_leaves(root, )))
     print()
     insert_in_order(root, Node(6))
-    insert_in_order(root, Node(7))
-    print('New traversal: ')
-    traversal_in_order(root)
-    print()
-    print("depth:{}".format(find_depth(root, 0)))
-    print("leaves:{}".format(count_leaves(root, )))
-    print("pre_order")
-    pre_order(root)
-    print()
-    print("post_order")
-    post_order(root)
-    remove_leaf(root, Node(6), 0)
-    remove_leaf(root, Node(7), 0)
-    print()
-    print("depth:{}".format(find_depth(root, 0)))
-    print("leaves:{}".format(count_leaves(root, )))
-    print('Inorder traversal: ')    
-    traversal_in_order(root)
+    # insert_in_order(root, Node(7))
+    print("Is proper:{}".format(is_proper(root)))
+    # print('New traversal: ')
+    # traversal_in_order(root)
+    # print()
+    # print("depth:{}".format(find_depth(root, 0)))
+    # print("leaves:{}".format(count_leaves(root, )))
+    # print("pre_order")
+    # pre_order(root)
+    # print()
+    # print("post_order")
+    # post_order(root)
+    # remove_leaf(root, Node(6), 0)
+    # remove_leaf(root, Node(7), 0)
+    # print()
+    # print("depth:{}".format(find_depth(root, 0)))
+    # print("leaves:{}".format(count_leaves(root, )))
+    # print('Inorder traversal: ')    
+    # traversal_in_order(root)
 
 
 

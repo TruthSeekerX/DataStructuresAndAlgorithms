@@ -54,6 +54,19 @@ def traversal_in_order(array, index):
         else:
             return None
 
+def count_leaves_array(array) -> int:
+    count = 0
+    treeLength = len(array)
+    for i in range(treeLength):
+        lchild = i * 2 + 1
+        rchild = i * 2 + 2
+        if lchild >= treeLength and rchild >= treeLength and array[i] is not None:
+            count += 1
+        elif array[i] is not None and lchild < treeLength and rchild < treeLength and array[lchild] is None and array[rchild] is None:
+            count += 1
+    return count
+
+
 btree = ['-', '/', '+', '*', '+', '*', 6, '+', 3, '-', 2, 3,
             '-', None, None, 3, 1, None, None, 9, 5, None, None, 
             None, None, 7, 4, None, None, None, None]
@@ -64,3 +77,7 @@ print(result)
 
 result = traversal_in_order(btree, 0)
 print(result)
+
+t = [3, 1, 2, 4, 5, None, 6, 7, None, None, 8]
+print("leaves:{}".format(count_leaves_array(btree)))
+print("leaves:{}".format(count_leaves_array(t)))
